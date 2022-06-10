@@ -47,10 +47,12 @@
         .validatorError {
             color: red;
         }
-        .dark{
+
+        .dark {
             display: none;
         }
-        .alert-info{
+
+        .alert-info {
             display: none;
         }
     </style>
@@ -117,16 +119,19 @@
                                 <div class=" col-sm-1 col-sm-1 col-xs-12">
                                     <a class="btn btn-round btn-success"
                                        href="${pageContext.request.contextPath}/admin/tv/regist/"
-                                       style="width: 100px;" onclick="gotoRegist()"><span class="glyphicon glyphicon-plus"
-                                                                                          aria-hidden="true"></span>新規</a>
+                                       style="width: 100px;" onclick="gotoRegist()"><span
+                                            class="glyphicon glyphicon-plus"
+                                            aria-hidden="true"></span>新規</a>
                                 </div>
 
                                 <form id="userForm" class="form-horizontal form-label-left input_mask" method="post">
                                     <div class="col-md-11">
                                         <label class="control-label col-md-1 col-sm-1 col-xs-12">カテゴリ</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
-                                            <span class="fa fa-bars form-control-feedback left" aria-hidden="true"></span>
-                                            <select class="form-control has-feedback-left" id="tvType" style="-webkit-appearance: none; padding-left: 45px;">
+                                            <span class="fa fa-bars form-control-feedback left"
+                                                  aria-hidden="true"></span>
+                                            <select class="form-control has-feedback-left" id="tvType"
+                                                    style="-webkit-appearance: none; padding-left: 45px;">
                                                 <option value="9">全部</option>
                                                 <option value="1">SPECIAL</option>
                                                 <option value="2">KIDS</option>
@@ -139,29 +144,37 @@
                                         <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                                             <span class="fa fa-calendar form-control-feedback left"
                                                   aria-hidden="true"></span>
-                                            <input type="date" class="form-control has-feedback-left" style="padding-right: 0;" id="date">
+                                            <input type="date" class="form-control has-feedback-left"
+                                                   style="padding-right: 0;" id="date">
                                         </div>
                                         <label class="control-label col-md-1 col-sm-1 col-xs-12">TOP表示</label>
                                         <div class="col-md-3 col-sm-1 col-xs-12 form-group has-feedback">
-                                            <span class="fa fa-fire form-control-feedback left" aria-hidden="true"></span>
+                                            <span class="fa fa-fire form-control-feedback left"
+                                                  aria-hidden="true"></span>
                                             <input type="text" class="form-control has-feedback-left" id="sortScore"
                                                    data-rule-digits="true" data-rule-maxlength="4">
                                         </div>
                                         <label class="control-label col-md-1 col-sm-1 col-xs-12">掲載開始&gt=</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                                            <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
-                                            <input type="date" class="form-control has-feedback-left" style="padding-right: 0;" id="publishStart">
+                                            <span class="fa fa-calendar form-control-feedback left"
+                                                  aria-hidden="true"></span>
+                                            <input type="date" class="form-control has-feedback-left"
+                                                   style="padding-right: 0;" id="publishStart">
                                         </div>
                                         <label class="control-label col-md-1 col-sm-1 col-xs-12">掲載終了&lt=</label>
                                         <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                                            <span class="fa fa-calendar form-control-feedback left" aria-hidden="true"></span>
-                                            <input path="publishEnd" type="date" class="form-control has-feedback-left" style="padding-right: 0;" id="publishEnd">
+                                            <span class="fa fa-calendar form-control-feedback left"
+                                                  aria-hidden="true"></span>
+                                            <input path="publishEnd" type="date" class="form-control has-feedback-left"
+                                                   style="padding-right: 0;" id="publishEnd">
                                             <span style="color: red" id="checkPublishEnd"></span>
                                         </div>
                                         <label class="control-label col-md-1 col-sm-1 col-xs-12">TVタイプ </label>
                                         <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
-                                            <span class="fa fa-bars form-control-feedback left" aria-hidden="true"></span>
-                                            <select class="form-control has-feedback-left" id="type" style="-webkit-appearance: none; padding-left: 45px;">
+                                            <span class="fa fa-bars form-control-feedback left"
+                                                  aria-hidden="true"></span>
+                                            <select class="form-control has-feedback-left" id="type"
+                                                    style="-webkit-appearance: none; padding-left: 45px;">
                                                 <option value="9">全部</option>
                                                 <option value="1">会員限定</option>
                                                 <option value="2">すべての方</option>
@@ -170,8 +183,10 @@
                                     </div>
 
                                     <div class="col-md-1 text-right" style="padding-right: 15px">
-                                        <button type="submit" class="btn btn-round btn-info " style="width: 100px;"><span
-                                                class="glyphicon glyphicon-search" aria-hidden="true"></span>検索</button>
+                                        <button type="submit" class="btn btn-round btn-info "
+                                                style="width: 100px;"><span
+                                                class="glyphicon glyphicon-search" aria-hidden="true"></span>検索
+                                        </button>
                                     </div>
                                 </form>
 
@@ -308,14 +323,14 @@
 <script>
     var $userForm = $("#userForm");
     $userForm.validate({
-        submitHandler: function(form) {
+        submitHandler: function (form) {
             searchData();
         },
-        errorClass : "validatorError"
+        errorClass: "validatorError"
     });
 
     var datatable = $('#tvListTable').DataTable({
-        dom:'lrtip',
+        dom: 'lrtip',
         processing: true,
         serverSide: true,
         ajax: {
@@ -334,46 +349,47 @@
             contentType: "application/json;charset=UTF-8",
             dataType: "json"
         },
-        order: [[ 3, 'desc' ]],
+        order: [[3, 'desc']],
         columns: [
             {
                 data: null,
                 render: function (data, type, full, meta) {
-                    if(full.tvType==1){
+                    if (full.tvType == 1) {
                         return '<button type="button" class="btn btn-danger" style="width: 90px;">SPECIAL</button>';
                     }
-                    if(full.tvType==2){
+                    if (full.tvType == 2) {
                         return '<button type="button" class="btn btn-primary" style="width: 90px;">KIDS</button>';
                     }
-                    if(full.tvType==3){
+                    if (full.tvType == 3) {
                         return '<button type="button" class="btn btn-success" style="width: 90px;">GIRLS</button>';
                     }
-                    if(full.tvType==4){
+                    if (full.tvType == 4) {
                         return '<button type="button" class="btn btn-primary" style="width: 90px;background-color: #D3D3D3;border-color: #ddffdd">LIFE</button>';
                     }
-                    if(full.tvType==5){
+                    if (full.tvType == 5) {
                         return '<button type="button" class="btn btn-primary" style="width: 90px;background-color: #FF1493;border-color: #FF00CC">OKAYAMA</button>';
                     }
                     return "";
                 },
                 name: "tv.tvType"
             },
-            { data: "title", name: "tv.title" },
-            { data: "office", name: "tv.office" },
-            {  data: null,
+            {data: "title", name: "tv.title"},
+            {data: "office", name: "tv.office"},
+            {
+                data: null,
                 render: function (data, type, full, meta) {
                     return '<div>' + formatDate(full.date) + '</div>';
                 },
                 name: "tv.date"
             },
-            { data: "sortScore", name: "tv.sortScore" },
+            {data: "sortScore", name: "tv.sortScore"},
             {
                 data: null,
                 render: function (data, type, full, meta) {
-                    if(full.type==1){
+                    if (full.type == 1) {
                         return '<div>会員限定</div>';
                     }
-                    if(full.type==2){
+                    if (full.type == 2) {
                         return '<div>すべての方</div>';
                     }
                     return '<div></div>';
@@ -398,20 +414,20 @@
                 data: null,
                 orderable: false,
                 render: function (data, type, full, meta) {
-                    return '<a class="btn btn-primary" style="font-size: inherit;" href="javascript:void(0)" onclick="gotoUpdate('+full.id+')">詳細</a>';
+                    return '<a class="btn btn-primary" style="font-size: inherit;" href="javascript:void(0)" onclick="gotoUpdate(' + full.id + ')">詳細</a>';
                 }
             },
             {
                 data: null,
                 orderable: false,
                 render: function (data, type, full, meta) {
-                    return '<button class="btn btn-danger" style="font-size: inherit;" onclick="gotoDelete('+full.id+')">削除</button>';
+                    return '<button class="btn btn-danger" style="font-size: inherit;" onclick="gotoDelete(' + full.id + ')">削除</button>';
                 }
             }
         ],
         columnDefs: [
             {
-                targets: [8,9],
+                targets: [8, 9],
                 searchable: false,
                 orderable: false
             }
@@ -437,7 +453,7 @@
 
     function gotoRegist() {
         $('#TVLoading').show();
-        window.location.href =  '${pageContext.request.contextPath}/admin/tv/regist/';
+        window.location.href = '${pageContext.request.contextPath}/admin/tv/regist/';
     }
 
     function confirmDeleteClick() {
@@ -456,16 +472,16 @@
 
     function formatDate(timestamp) {
         var rtn = "";
-        if(timestamp == null){
+        if (timestamp == null) {
             return rtn;
-        }else{
+        } else {
             var date = new Date(timestamp);
             var year = date.getFullYear();
             var month = "0" + (date.getMonth() + 1);
             var day = "0" + date.getDate();
-            if(year == "1970" && month== "01" && day == "00"){
-            }else{
-                rtn = year + "-" + month.substring(month.length - 2,month.length) + "-" + day.substring(day.length - 2,day.length);
+            if (year == "1970" && month == "01" && day == "00") {
+            } else {
+                rtn = year + "-" + month.substring(month.length - 2, month.length) + "-" + day.substring(day.length - 2, day.length);
             }
             return rtn;
         }
@@ -473,47 +489,47 @@
 
     function formatDate2(timestamp) {
         var rtn = "";
-        if(timestamp == null){
+        if (timestamp == null) {
             return rtn;
-        }else{
+        } else {
             var date = new Date(timestamp);
             var year = date.getFullYear();
             var month = "0" + (date.getMonth() + 1);
             var day = "0" + date.getDate();
-            var hour ="0" + date.getHours();
+            var hour = "0" + date.getHours();
             var minute = "0" + date.getMinutes();
-            if(year == "1970" && month== "01" && day == "00"){
-            }else{
-                rtn = year + "-" + month.substring(month.length - 2,month.length) + "-" + day.substring(day.length - 2,day.length)+" "+hour.substring(hour.length - 2,hour.length)+":"+minute.substring(minute.length - 2,minute.length);
+            if (year == "1970" && month == "01" && day == "00") {
+            } else {
+                rtn = year + "-" + month.substring(month.length - 2, month.length) + "-" + day.substring(day.length - 2, day.length) + " " + hour.substring(hour.length - 2, hour.length) + ":" + minute.substring(minute.length - 2, minute.length);
             }
             return rtn;
         }
     }
 
-    $("#publishEnd").change(function(){
+    $("#publishEnd").change(function () {
         var startDate = $('#publishStart').val();
         var publishEnd = $('#publishEnd').val();
         var date = (new Date(Date.parse(publishEnd.replace("-", "/"))) > new Date(Date.parse(startDate.replace("-", "/")))) || (new Date(Date.parse(publishEnd.replace("-", "/"))).equals(new Date(Date.parse(startDate.replace("-", "/")))));
         debugger;
-        if(startDate.length != 0 && publishEnd.length != 0){
-            if(date){
+        if (startDate.length != 0 && publishEnd.length != 0) {
+            if (date) {
                 document.getElementById("checkPublishEnd").innerHTML = "";
-            }else{
+            } else {
                 document.getElementById("checkPublishEnd").innerHTML = "掲載開始日以上の値を入力してください。";
             }
-        }else {
+        } else {
             document.getElementById("checkPublishEnd").innerHTML = "";
         }
     })
-    $("#publishStart").change(function(){
+    $("#publishStart").change(function () {
         var startDate = $('#publishStart').val();
         var publishEnd = $('#publishEnd').val();
         var date = (new Date(Date.parse(publishEnd.replace("-", "/"))) > new Date(Date.parse(startDate.replace("-", "/")))) || (new Date(Date.parse(publishEnd.replace("-", "/"))).equals(new Date(Date.parse(startDate.replace("-", "/")))));
         debugger;
-        if(publishEnd.length != 0){
-            if(date){
+        if (publishEnd.length != 0) {
+            if (date) {
                 document.getElementById("checkPublishEnd").innerHTML = "";
-            }else{
+            } else {
                 document.getElementById("checkPublishEnd").innerHTML = "掲載開始日以上の値を入力してください。";
             }
         }
@@ -522,7 +538,7 @@
 
     var errorCode = ${errorCode};
 
-    if(errorCode == 1){
+    if (errorCode == 1) {
         new PNotify({
             title: 'エラーが発生しました',
             text: 'データの更新に失敗しました。',

@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * a
  * ReportService
  * Created by wubin.
  * <p>
@@ -42,55 +43,55 @@ public class ReportService {
     }
 
     public List<Report> getReportAllForTop() {
-        String nowMin= DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(0);
-        String nextMin= DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(1);
+        String nowMin = DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(0);
+        String nextMin = DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(1);
 //        String now= DateUtil.dateToStringyyyy_MM_dd_HH_mm(new Date(System.currentTimeMillis()));
-        List<Report> reportList = reportMapper.getReportAllForTop(nowMin,nextMin);
+        List<Report> reportList = reportMapper.getReportAllForTop(nowMin, nextMin);
         return reportList;
     }
 
-    public List<Report> getReportCategory(int type,int limit,int offset) {
-        List<Report> reportList = reportMapper.getReportCategory(type,limit,offset);
+    public List<Report> getReportCategory(int type, int limit, int offset) {
+        List<Report> reportList = reportMapper.getReportCategory(type, limit, offset);
         return reportList;
     }
 
-    public List<Report>getReportPre(Date date) {
-        String nowMin= DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(0);
-        String nextMin= DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(1);
-        List<Report> report = reportMapper.getReportPre(date,nowMin,nextMin);
+    public List<Report> getReportPre(Date date) {
+        String nowMin = DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(0);
+        String nextMin = DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(1);
+        List<Report> report = reportMapper.getReportPre(date, nowMin, nextMin);
         return report;
     }
 
     public List<Report> getReportNext(Date date) {
-        String nowMin= DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(0);
-        String nextMin= DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(1);
-        List<Report> report = reportMapper.getReportNext(date,nowMin,nextMin);
+        String nowMin = DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(0);
+        String nextMin = DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(1);
+        List<Report> report = reportMapper.getReportNext(date, nowMin, nextMin);
         return report;
     }
 
-    public List<Report> getReportAll(int type,int limit,int offset) {
-        String nowMin= DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(0);
-        String nextMin= DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(1);
-        List<Report> reportList = reportMapper.getReportJsonAll(type,nowMin,nextMin,limit, offset);
+    public List<Report> getReportAll(int type, int limit, int offset) {
+        String nowMin = DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(0);
+        String nextMin = DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(1);
+        List<Report> reportList = reportMapper.getReportJsonAll(type, nowMin, nextMin, limit, offset);
         return reportList;
     }
 
     public List<Report> getReportAllByType(int type) {
-        String nowMin= DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(0);
-        String nextMin= DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(1);
-        List<Report> reportList = reportMapper.getReportJsonAllByType(type,nowMin,nextMin);
+        String nowMin = DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(0);
+        String nextMin = DateUtil.getTimeByMinuteYyyy_MM_ddHHmm(1);
+        List<Report> reportList = reportMapper.getReportJsonAllByType(type, nowMin, nextMin);
         return reportList;
     }
 
-    public Report getReportByIdAndType(long id,int type) {
-        Report report = reportMapper.getReportByIdAndType(id,type);
+    public Report getReportByIdAndType(long id, int type) {
+        Report report = reportMapper.getReportByIdAndType(id, type);
         return report;
     }
 
-    public List<Report> getReportEventAll(int type1,int type2,int limit,int offset) {
+    public List<Report> getReportEventAll(int type1, int type2, int limit, int offset) {
         String today = DateUtil.getYyyyMMdd();
         String tomorrow = DateUtil.getTomorrow();
-        List<Report> reportList = reportMapper.getReportEventAll(type1,type2,tomorrow,today,limit, offset);
+        List<Report> reportList = reportMapper.getReportEventAll(type1, type2, tomorrow, today, limit, offset);
         return reportList;
     }
 
@@ -104,15 +105,16 @@ public class ReportService {
 
     @Autowired
     private ReportMapper addReportMapper;
+
     //TODO
     public long insertReport(ReportForm reportForm) {
         Report report = new Report();
         String uuid = "";
         int flagUuid = 0;
         int cntSelect = 0;
-        while (flagUuid != 1 && cntSelect < 100){
+        while (flagUuid != 1 && cntSelect < 100) {
             uuid = StringUtil.getUuid();
-            if (getReportByUuid(uuid) == null){
+            if (getReportByUuid(uuid) == null) {
                 flagUuid = 1;
             }
             cntSelect++;
@@ -120,20 +122,20 @@ public class ReportService {
 
         report.setUuid(uuid);
         String date = reportForm.getDate();
-        report.setDate(DateUtil.stringToDateyyyy_MM_dd_HH_mm(date.replace("T"," ")));
+        report.setDate(DateUtil.stringToDateyyyy_MM_dd_HH_mm(date.replace("T", " ")));
         report.setTitle(reportForm.getTitle());
         report.setType(reportForm.getType());
         report.setSortScore(reportForm.getSortScore());
         report.setExcerpt(reportForm.getExcerpt());
-        if(reportForm.getPublishStart() == null || "".equals(reportForm.getPublishStart())){
+        if (reportForm.getPublishStart() == null || "".equals(reportForm.getPublishStart())) {
             report.setPublishStart(DateUtil.getDefaultDate());
-        }else{
-            report.setPublishStart(DateUtil.stringToDateyyyy_MM_dd_HH_mm(reportForm.getPublishStart().replace("T"," ")));
+        } else {
+            report.setPublishStart(DateUtil.stringToDateyyyy_MM_dd_HH_mm(reportForm.getPublishStart().replace("T", " ")));
         }
-        if(reportForm.getPublishEnd() == null || "".equals(reportForm.getPublishEnd())){
+        if (reportForm.getPublishEnd() == null || "".equals(reportForm.getPublishEnd())) {
             report.setPublishEnd(DateUtil.getDefaultPublishEnd());
-        }else{
-            report.setPublishEnd(DateUtil.stringToDateyyyy_MM_dd_HH_mm(reportForm.getPublishEnd().replace("T"," ")));
+        } else {
+            report.setPublishEnd(DateUtil.stringToDateyyyy_MM_dd_HH_mm(reportForm.getPublishEnd().replace("T", " ")));
         }
         report.setCreateDatetime(new Date(System.currentTimeMillis()));
         report.setDelFlg(Boolean.FALSE);
@@ -147,9 +149,9 @@ public class ReportService {
         String uuid = "";
         int flagUuid = 0;
         int cntSelect = 0;
-        while (flagUuid != 1 && cntSelect < 100){
+        while (flagUuid != 1 && cntSelect < 100) {
             uuid = StringUtil.getUuid();
-            if (getReportByUuid(uuid) == null){
+            if (getReportByUuid(uuid) == null) {
                 flagUuid = 1;
             }
             cntSelect++;
@@ -162,14 +164,14 @@ public class ReportService {
         report.setType(reportForm.getType());
         report.setSortScore(reportForm.getSortScore());
         report.setExcerpt(reportForm.getExcerpt());
-        if(reportForm.getPublishStart() == null || "".equals(reportForm.getPublishStart())){
+        if (reportForm.getPublishStart() == null || "".equals(reportForm.getPublishStart())) {
             report.setPublishStart(DateUtil.getDefaultDate());
-        }else{
+        } else {
             report.setPublishStart(DateUtil.stringToDateyyyy_MM_dd(reportForm.getPublishStart()));
         }
-        if(reportForm.getPublishEnd() == null || "".equals(reportForm.getPublishEnd())){
+        if (reportForm.getPublishEnd() == null || "".equals(reportForm.getPublishEnd())) {
             report.setPublishEnd(DateUtil.getDefaultPublishEnd());
-        }else{
+        } else {
             report.setPublishEnd(DateUtil.stringToDateyyyy_MM_dd(reportForm.getPublishEnd()));
         }
         report.setCreateDatetime(new Date(System.currentTimeMillis()));
@@ -182,11 +184,11 @@ public class ReportService {
     @Autowired
     private ReportDetailMapper reportDetailMapper;
 
-    public long insertDetailReport(ReportForm reportForm,long reportId) {
+    public long insertDetailReport(ReportForm reportForm, long reportId) {
         ReportDetail reportDetail = new ReportDetail();
         reportDetail.setReportId(reportId);
         String date = reportForm.getDate();
-        reportDetail.setDate(DateUtil.stringToDateyyyy_MM_dd_HH_mm(date.replace("T"," ")));
+        reportDetail.setDate(DateUtil.stringToDateyyyy_MM_dd_HH_mm(date.replace("T", " ")));
         reportDetail.setTitle(reportForm.getTitle());
         reportDetail.setType(reportForm.getType());
         reportDetail.setDetail(reportForm.getDetail());
@@ -197,7 +199,7 @@ public class ReportService {
         return reportDetail.getId();
     }
 
-    public long insertDetailStudioReport(ReportForm reportForm,long reportId) {
+    public long insertDetailStudioReport(ReportForm reportForm, long reportId) {
         ReportDetail reportDetail = new ReportDetail();
         reportDetail.setReportId(reportId);
         String date = reportForm.getDate();
@@ -233,20 +235,20 @@ public class ReportService {
         Report report = new Report();
         report.setId(reportForm.getId());
         String date = reportForm.getDate();
-        report.setDate(DateUtil.stringToDateyyyy_MM_dd_HH_mm(date.replace("T"," ")));
+        report.setDate(DateUtil.stringToDateyyyy_MM_dd_HH_mm(date.replace("T", " ")));
         report.setTitle(reportForm.getTitle());
         report.setType(reportForm.getType());
         report.setSortScore(reportForm.getSortScore());
         report.setExcerpt(reportForm.getExcerpt());
-        if(reportForm.getPublishStart() == null || "".equals(reportForm.getPublishStart())){
+        if (reportForm.getPublishStart() == null || "".equals(reportForm.getPublishStart())) {
             report.setPublishStart(DateUtil.getDefaultDate());
-        }else{
-            report.setPublishStart(DateUtil.stringToDateyyyy_MM_dd_HH_mm(reportForm.getPublishStart().replace("T"," ")));
+        } else {
+            report.setPublishStart(DateUtil.stringToDateyyyy_MM_dd_HH_mm(reportForm.getPublishStart().replace("T", " ")));
         }
-        if(reportForm.getPublishEnd() == null || "".equals(reportForm.getPublishEnd())){
+        if (reportForm.getPublishEnd() == null || "".equals(reportForm.getPublishEnd())) {
             report.setPublishEnd(DateUtil.getDefaultPublishEnd());
-        }else{
-            report.setPublishEnd(DateUtil.stringToDateyyyy_MM_dd_HH_mm(reportForm.getPublishEnd().replace("T"," ")));
+        } else {
+            report.setPublishEnd(DateUtil.stringToDateyyyy_MM_dd_HH_mm(reportForm.getPublishEnd().replace("T", " ")));
         }
         report.setUpdateDatetime(new Date(System.currentTimeMillis()));
         report.setDelFlg(Boolean.FALSE);
@@ -264,14 +266,14 @@ public class ReportService {
         report.setType(reportForm.getType());
         report.setSortScore(reportForm.getSortScore());
         report.setExcerpt(reportForm.getExcerpt());
-        if(reportForm.getPublishStart() == null || "".equals(reportForm.getPublishStart())){
+        if (reportForm.getPublishStart() == null || "".equals(reportForm.getPublishStart())) {
             report.setPublishStart(DateUtil.getDefaultDate());
-        }else{
+        } else {
             report.setPublishStart(DateUtil.stringToDateyyyy_MM_dd(reportForm.getPublishStart()));
         }
-        if(reportForm.getPublishEnd() == null || "".equals(reportForm.getPublishEnd())){
+        if (reportForm.getPublishEnd() == null || "".equals(reportForm.getPublishEnd())) {
             report.setPublishEnd(DateUtil.getDefaultPublishEnd());
-        }else{
+        } else {
             report.setPublishEnd(DateUtil.stringToDateyyyy_MM_dd(reportForm.getPublishEnd()));
         }
         report.setUpdateDatetime(new Date(System.currentTimeMillis()));
@@ -285,7 +287,7 @@ public class ReportService {
         ReportDetail reportDetail = new ReportDetail();
         reportDetail.setReportId(reportForm.getId());
         String date = reportForm.getDate();
-        reportDetail.setDate(DateUtil.stringToDateyyyy_MM_dd_HH_mm(date.replace("T"," ")));
+        reportDetail.setDate(DateUtil.stringToDateyyyy_MM_dd_HH_mm(date.replace("T", " ")));
         reportDetail.setTitle(reportForm.getTitle());
         reportDetail.setType(reportForm.getType());
         reportDetail.setDetail(reportForm.getDetail());

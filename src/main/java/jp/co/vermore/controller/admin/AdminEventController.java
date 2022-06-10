@@ -1,29 +1,20 @@
 package jp.co.vermore.controller.admin;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import jp.co.vermore.common.Constant;
 import jp.co.vermore.common.DatatablesJsonObject;
 import jp.co.vermore.common.JsonStatus;
 import jp.co.vermore.common.mvc.APIException;
+import jp.co.vermore.common.mvc.BaseController;
 import jp.co.vermore.common.util.DateUtil;
 import jp.co.vermore.entity.EntryMail;
+import jp.co.vermore.entity.Event;
+import jp.co.vermore.entity.EventDetail;
 import jp.co.vermore.entity.Pic;
 import jp.co.vermore.form.EventRegistForm;
-import jp.co.vermore.form.admin.DatatablesBaseForm;
 import jp.co.vermore.form.admin.EventListForm;
 import jp.co.vermore.service.AWSService;
 import jp.co.vermore.service.EntryService;
 import jp.co.vermore.service.EventService;
-
-import jp.co.vermore.common.mvc.BaseController;
-import jp.co.vermore.entity.Event;
-import jp.co.vermore.entity.EventDetail;
 import jp.co.vermore.service.PicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +25,12 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * EventAdminController
@@ -63,15 +60,16 @@ public class AdminEventController extends BaseController {
 
     // Event admin list
     @RequestMapping(value = "/admin/event/list/", method = RequestMethod.GET)
-    public String eventList(Model model,HttpServletRequest request) {
+    public String eventList(Model model, HttpServletRequest request) {
 
         int errorCode = 0;
-        if(!request.getSession().isNew()){
-            if(request.getSession().getAttribute("error") != null && request.getSession().getAttribute("error") != ""){
-                errorCode = (int)request.getSession().getAttribute("error");
-                request.getSession().setAttribute("error",0);
+        if (!request.getSession().isNew()) {
+            if (request.getSession().getAttribute("error") != null && request.getSession().getAttribute("error") != "") {
+                errorCode = (int) request.getSession().getAttribute("error");
+                request.getSession().setAttribute("error", 0);
             }
         }
+
         model.addAttribute("errorCode", errorCode);
 
         List<Event> List = eventService.getEventAll(10l, 0l);
@@ -79,39 +77,38 @@ public class AdminEventController extends BaseController {
         return "admin/eventList";
     }
 
-
     @RequestMapping(value = "/admin/event/list/", method = RequestMethod.POST)
     @ResponseBody
-    public DatatablesJsonObject eventList(@RequestBody EventListForm form){
-        logger.debug("----1----");
+    public DatatablesJsonObject eventList(@RequestBody EventListForm form) {
+        BaseController.logger.debug("----1----");
         // set order statement
-        if(form.getOrder().size() > 0
+        if (form.getOrder().size() > 0
                 && form.getColumns().get(form.getOrder().get(0).getColumn()).getName() != null
-                && form.getColumns().get(form.getOrder().get(0).getColumn()).getName().length() > 0){
+                && form.getColumns().get(form.getOrder().get(0).getColumn()).getName().length() > 0) {
             form.setOrderStatement(form.getColumns().get(form.getOrder().get(0).getColumn()).getName() + " " + form.getOrder().get(0).getDir());
-            logger.debug("----2----order statement="+form.getOrderStatement());
-        }else{
+            BaseController.logger.debug("----2----order statement=" + form.getOrderStatement());
+        } else {
             form.setOrderStatement("id");
-            logger.debug("----2----order statement="+form.getOrderStatement());
+            BaseController.logger.debug("----2----order statement=" + form.getOrderStatement());
         }
-        logger.debug("----3----");
+        BaseController.logger.debug("----3----");
 
         // query data
         List<Event> dataList = eventService.getEventAllByCondition(form);
 
         int totalCountFiltered = eventService.getEventCountByCondition(form);
         int totalCount = eventService.getEventCount();
-        logger.debug("----4----data count="+dataList.size());
-        logger.debug("----5----total filtered="+totalCountFiltered);
-        logger.debug("----6----total count="+totalCount);
-        logger.debug("----7----page="+form.getDraw());
+        BaseController.logger.debug("----4----data count=" + dataList.size());
+        BaseController.logger.debug("----5----total filtered=" + totalCountFiltered);
+        BaseController.logger.debug("----6----total count=" + totalCount);
+        BaseController.logger.debug("----7----page=" + form.getDraw());
 
-        for(Event event:dataList){
-            EntryMail entity = entryService.getEntryMailByEntryIdAndType( event.getId(),Constant.ENTRY__MAIL_TYPE.EVENT);
-            event.setType((int)Constant.ENTRY__MAIL_TYPE.EVENT);
-            if(entity != null){
+        for (Event event : dataList) {
+            EntryMail entity = entryService.getEntryMailByEntryIdAndType(event.getId(), Constant.ENTRY__MAIL_TYPE.EVENT);
+            event.setType((int) Constant.ENTRY__MAIL_TYPE.EVENT);
+            if (entity != null) {
                 event.setEntryType(1);//応募可能
-            }else{
+            } else {
                 event.setEntryType(0);//応募できない
             }
         }
@@ -121,7 +118,7 @@ public class AdminEventController extends BaseController {
         jsonparse.setRecordsFiltered(totalCountFiltered);
         jsonparse.setRecordsTotal(totalCount);
         jsonparse.setData(dataList);
-        logger.debug("----8----");
+        BaseController.logger.debug("----8----");
         return jsonparse;
     }
 
@@ -135,7 +132,7 @@ public class AdminEventController extends BaseController {
 
     // Event admin add execution
     @RequestMapping(value = "/admin/event/regist/", method = RequestMethod.POST)
-    public String eventRegist(@ModelAttribute EventRegistForm form, Model model,HttpServletRequest request) throws APIException{
+    public String eventRegist(@ModelAttribute EventRegistForm form, Model model, HttpServletRequest request) throws APIException {
         HttpSession session = request.getSession();
         // upload files
         try {
@@ -143,9 +140,9 @@ public class AdminEventController extends BaseController {
                 //form.setPicUrl(awsService.postMiddleThumbnailFile(form.getPicFile()));
                 form.setPicUrl(awsService.postFile(form.getPicFile()));
             }
-            session.setAttribute("error",0);
-        }catch (IOException e) {
-            session.setAttribute("error",1);
+            session.setAttribute("error", 0);
+        } catch (IOException e) {
+            session.setAttribute("error", 1);
             throw new APIException(JsonStatus.DATA_SAVE_FAILED);
         }
 
@@ -159,9 +156,9 @@ public class AdminEventController extends BaseController {
 
             MultipartFile[] star = form.getPicFile1();
             Pic starPic = new Pic();
-            if (star.length>0) {
-                for(int i = 0 ; i < star.length; i++){
-                    starPic.setPicUrl(awsService.postWatermarkFile(request,star[i]));
+            if (star.length > 0) {
+                for (int i = 0; i < star.length; i++) {
+                    starPic.setPicUrl(awsService.postWatermarkFile(request, star[i]));
                     starPic.setItemId(eventId);
                     starPic.setItemType(Constant.EVENT_PIC_TYPE.STAR);
                     picService.insertPic(starPic);
@@ -170,21 +167,21 @@ public class AdminEventController extends BaseController {
 
             MultipartFile[] comment = form.getPicFile2();
             Pic commentPic = new Pic();
-            if (comment[0].getSize()>0) {
-                for(int i = 0 ; i < comment.length; i++){
-                    commentPic.setPicUrl(awsService.postWatermarkFile(request,comment[i]));
+            if (comment[0].getSize() > 0) {
+                for (int i = 0; i < comment.length; i++) {
+                    commentPic.setPicUrl(awsService.postWatermarkFile(request, comment[i]));
                     commentPic.setItemId(eventId);
                     commentPic.setItemType(Constant.EVENT_PIC_TYPE.COMMENT);
                     picService.insertPic(commentPic);
                 }
             }
             txManager.commit(txStatus);
-            session.setAttribute("error",0);
+            session.setAttribute("error", 0);
         } catch (Exception e) {
             txManager.rollback(txStatus);
-            session.setAttribute("error",1);
-            logger.error("insert Event failed, error=" + e.getMessage());
-            logger.error("insert Event failed, error=" + e.toString());
+            session.setAttribute("error", 1);
+            BaseController.logger.error("insert Event failed, error=" + e.getMessage());
+            BaseController.logger.error("insert Event failed, error=" + e.toString());
             e.printStackTrace();
         }
         return "redirect:/admin/event/list/";
@@ -216,15 +213,15 @@ public class AdminEventController extends BaseController {
 
         eventRegistForm.setVideoUrl1(eventDetail.getVideoUrl1());
 
-        List<Pic> starPicList = picService.getPic(id,Constant.EVENT_PIC_TYPE.STAR);
+        List<Pic> starPicList = picService.getPic(id, Constant.EVENT_PIC_TYPE.STAR);
         List<String> starList = new ArrayList<String>();
-        for(Pic pic:starPicList){
+        for (Pic pic : starPicList) {
             starList.add(pic.getPicUrl());
         }
         eventRegistForm.setPicUrl1(starList);
-        List<Pic> commentPicList = picService.getPic(id,Constant.EVENT_PIC_TYPE.COMMENT);
+        List<Pic> commentPicList = picService.getPic(id, Constant.EVENT_PIC_TYPE.COMMENT);
         List<String> commentList = new ArrayList<String>();
-        for(Pic pic:commentPicList){
+        for (Pic pic : commentPicList) {
             commentList.add(pic.getPicUrl());
         }
         eventRegistForm.setPicUrl2(commentList);
@@ -234,16 +231,16 @@ public class AdminEventController extends BaseController {
 
     // Event admin edit post
     @RequestMapping(value = "/admin/event/update/", method = RequestMethod.POST)
-    public String eventUpdate(@ModelAttribute EventRegistForm form,HttpServletRequest request) throws APIException{
+    public String eventUpdate(@ModelAttribute EventRegistForm form, HttpServletRequest request) throws APIException {
         // upload files
         HttpSession session = request.getSession();
         try {
             if (!form.getPicFile().isEmpty()) {
                 form.setPicUrl(awsService.postFile(form.getPicFile()));
             }
-            session.setAttribute("error",0);
-        }catch (IOException e) {
-            session.setAttribute("error",1);
+            session.setAttribute("error", 0);
+        } catch (IOException e) {
+            session.setAttribute("error", 1);
             throw new APIException(JsonStatus.DATA_SAVE_FAILED);
         }
 
@@ -256,12 +253,12 @@ public class AdminEventController extends BaseController {
             eventService.updateEventDetail(form);
 
             txManager.commit(txStatus);
-            session.setAttribute("error",0);
+            session.setAttribute("error", 0);
         } catch (Exception e) {
             txManager.rollback(txStatus);
-            session.setAttribute("error",1);
-            logger.error("Update Event failed!, error=" + e.getMessage());
-            logger.error("Update Event failed!, error=" + e.toString());
+            session.setAttribute("error", 1);
+            BaseController.logger.error("Update Event failed!, error=" + e.getMessage());
+            BaseController.logger.error("Update Event failed!, error=" + e.toString());
             e.printStackTrace();
         }
         return "redirect:/admin/event/list/";
@@ -269,7 +266,7 @@ public class AdminEventController extends BaseController {
 
     // Event admin delete
     @RequestMapping(value = "/admin/event/delete/", method = RequestMethod.POST)
-    public String eventDelete(HttpServletRequest hsr,HttpServletRequest request) {
+    public String eventDelete(HttpServletRequest hsr, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long eventId = Long.valueOf(hsr.getParameterValues("event_id")[0]);
 
@@ -279,13 +276,13 @@ public class AdminEventController extends BaseController {
         TransactionStatus txStatus = txManager.getTransaction(txDefinition);
         try {
             eventService.deleteEvent(eventId);
-            session.setAttribute("error",0);
+            session.setAttribute("error", 0);
             EventDetail eventDetail = eventService.getEventDetailByEventId(eventId);
             eventService.deleteEventDetail(eventDetail.getEventId());
             txManager.commit(txStatus);
         } catch (Exception e) {
             txManager.rollback(txStatus);
-            session.setAttribute("error",1);
+            session.setAttribute("error", 1);
         }
         return "redirect:/admin/event/list/";
     }

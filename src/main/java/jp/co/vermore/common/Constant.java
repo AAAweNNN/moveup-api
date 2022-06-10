@@ -1,9 +1,5 @@
 package jp.co.vermore.common;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-
 /**
  * Created by xieyoujun on 2018/02/03.
  */
@@ -55,7 +51,7 @@ public class Constant {
         public final static int ISLOGIN = 1;
     }
 
-    public static class USER_TYPE{
+    public static class USER_TYPE {
         public final static int ADMIN_USER = 1;
         public final static int CUSTOMER = 2;
     }
@@ -70,13 +66,13 @@ public class Constant {
         public final static int CUSTOMER_RECRUIT = 3;
     }
 
-    public static class ENTRY_TYPE{
+    public static class ENTRY_TYPE {
         public final static int APPLICATION = 1;
         public final static int IS_ENTRY = 1;
         public final static int NOT_ENTRY = 2;
     }
 
-    public static class USER_PRIVILEGE{
+    public static class USER_PRIVILEGE {
         public final static int NO_AUTHORITY = 0;
         public final static int READ = 1;
         public final static int WRITE = 2;
@@ -152,7 +148,8 @@ public class Constant {
         public final static int REST_WEEK = 33;
         public final static int REST_WEEKDAY = 34;
     }
-    public static class FAV_TYPE{
+
+    public static class FAV_TYPE {
         public final static int EVENT = 13;
         public final static int GOODS = 15;
         public final static int SHOP = 14;
@@ -163,7 +160,7 @@ public class Constant {
         public final static int CORPORATEINFO = 20;
     }
 
-    public static class NOTIFY_NOW45{
+    public static class NOTIFY_NOW45 {
         public final static byte now4 = 1;
         public final static byte now5 = 2;
         public final static Byte NOTIFY_TYPE_INAPP = 1;
@@ -174,7 +171,7 @@ public class Constant {
         public final static Byte PUSH_STATUS_SENT = 2;
     }
 
-    public static class SHOP_HEALTH_GENRE{
+    public static class SHOP_HEALTH_GENRE {
         public final static int SALON = 301;
         public final static int MASSAGE = 302;
         public final static int CHIROPRATIC = 303;
@@ -186,7 +183,7 @@ public class Constant {
         public final static int COSMETIC_SURGERY = 309;
     }
 
-    public static class SHOP_LEARN_GENRE{
+    public static class SHOP_LEARN_GENRE {
         public final static int SCHOOL = 901;
         public final static int PRE_SCHOOL = 902;
         public final static int CRAM_SCHOOL = 903;
@@ -200,7 +197,7 @@ public class Constant {
         public final static int IT_CLASS = 911;
     }
 
-    public static class SHOP_FACILITY_GENRE{
+    public static class SHOP_FACILITY_GENRE {
         public final static int ACCOMMODATION = 1001;
         public final static int COMMUNAL = 1002;
         public final static int COMMERCIAL = 1003;
@@ -208,7 +205,7 @@ public class Constant {
         public final static int TEMPLE = 1005;
     }
 
-    public static class SHOP_LIFE_GENRE{
+    public static class SHOP_LIFE_GENRE {
         public final static int HOUSE = 1101;
         public final static int LIFE = 1102;
         public final static int HOBBY = 1103;
@@ -281,7 +278,7 @@ public class Constant {
         public final static Byte REDUCE = 2;
     }
 
-    public static class CAREER{
+    public static class CAREER {
         public final static int CAREER = 0;
         public final static int JUNIOR_STUDENT = 1;
         public final static int SENIOR_STUDENT = 2;
@@ -299,7 +296,7 @@ public class Constant {
         public final static int OTHER = 14;
     }
 
-    public static class PURCHASE_STATUS{
+    public static class PURCHASE_STATUS {
         public final static int CART = 11;
         public final static int PURCHASE_SUCCESS = 12;
         public final static int PURCHASE_FAILURE = 13;
@@ -319,6 +316,16 @@ public class Constant {
         public final static Byte ENTRY = 4;
         public final static Byte STUDIO_NEWS = 5;
     }
+
+    public static class TEAM_TYPE {
+        public final static Byte UNKNOW = 0;
+        public final static Byte EVENT = 1;
+        public final static Byte MOVEUP = 2;
+        public final static Byte TEAM = 3;
+        public final static Byte ENTRY = 4;
+        public final static Byte STUDIO_NEWS = 5;
+    }
+
 
     /**
      * 20210317　楊追加
@@ -356,7 +363,7 @@ public class Constant {
         public final static Byte PUSH_STATUS_UNSENT = 1;
         public final static Byte PUSH_STATUS_SENT = 2;
         public final static int PUSH_ADMIN = 1;
-        public final static int PUSH_NOW4= 2;
+        public final static int PUSH_NOW4 = 2;
         public final static int PUSH_NOW5 = 3;
     }
 
@@ -385,7 +392,7 @@ public class Constant {
         public final static int WORKING_TIME_START = 6;                           // 6：就業時間が始まる(HHMM)
         public final static int WORKING_TIME_END = 7;                             // 7：就業時間が終わる(HHMM)
         public final static int CAREER = 8;                                       // 8:業種
-        public final static int WORK_PERIOD= 9;
+        public final static int WORK_PERIOD = 9;
         public final static int WORK_TIME = 10;
         public final static int CAPACITY = 11;
         public final static int WORK_WAY = 12;
@@ -395,7 +402,7 @@ public class Constant {
 
     }
 
-    public static class EVENT_PIC_TYPE{
+    public static class EVENT_PIC_TYPE {
         public final static Byte STAR = 1;
         public final static Byte COMMENT = 2;
         public final static Byte TEAM = 3;
@@ -411,14 +418,16 @@ public class Constant {
         public final static Byte STUDIO_REPORT_DETAIL = 13;
         public final static Byte REPORT_TOP = 14;
         public final static Byte REPORT_FOOT = 15;
+        public final static Byte Team_TOP = 16;
+        public final static Byte Team_FOOT = 17;
     }
 
-    public static class FREEPAPER_PIC_TYPE{
+    public static class FREEPAPER_PIC_TYPE {
         public final static Byte IMG = 1;
         public final static Byte PDF = 2;
     }
 
-    public static class BATCH_TYPE{
+    public static class BATCH_TYPE {
         public final static Byte COUPON = 1;
         public final static Byte SHOP_MONTHLY_EXPENSES = 2;
         public final static Byte PEYMENT_CVS = 3;
@@ -436,13 +445,13 @@ public class Constant {
         public final static Byte PERSON_MAIL = 20;
     }
 
-    public static class BATCH_STATUS{
+    public static class BATCH_STATUS {
         public final static Byte NOT_BEGINNING = 0;
         public final static Byte WORKING = 1;
         public final static Byte FINISH = 2;
     }
 
-    public static class SETTLEMENT_ITEM_TYPE{
+    public static class SETTLEMENT_ITEM_TYPE {
         public final static Byte SHOP = 1;
         public final static Byte GOODS = 2;
         public final static Byte TOP = 3;
@@ -453,7 +462,7 @@ public class Constant {
         public final static Byte RECRUIT = 8;
     }
 
-    public static class SETTLEMENT_TYPE{
+    public static class SETTLEMENT_TYPE {
         public final static Byte COUPON = 1;
         public final static Byte SCORE = 2;
         public final static Byte ADVERTISEMENT = 3;
@@ -461,24 +470,24 @@ public class Constant {
         public final static Byte SUBSHOP = 5;
     }
 
-    public static class SETTLEMENT_STATUS{
+    public static class SETTLEMENT_STATUS {
         public final static boolean UNSETTLED = false;
         public final static boolean ALREADY_SETTLED = true;
     }
 
-    public static class SETTLEMENT_METHOD{
+    public static class SETTLEMENT_METHOD {
         public final static Byte UNSETTLED = 0;
         public final static Byte CREDIT_CARD = 1;
         public final static Byte BANK_ACCOUNT_BUCKLE = 2;
         public final static Byte BANK_REMITTANCE = 3;
     }
 
-    public static class PURCHASE_TYPE{
+    public static class PURCHASE_TYPE {
         public final static String CARD = "クレジットカード";
         public final static String CVS = "コンビニ";
     }
 
-    public static class PAYMENT_TYPE{
+    public static class PAYMENT_TYPE {
         public final static int PURCHASE_SUCCESS = 1;
         public final static int PURCHASE_FAILURE = 2;
         public final static int DELIVER_GOODS = 3;
@@ -486,7 +495,7 @@ public class Constant {
         public final static int TRANSACTION_COMPLETION = 5;
     }
 
-    public static class USER_SETTING{
+    public static class USER_SETTING {
         public final static String SHOP = "1";
         public final static String EVENT = "2";
         public final static String TV = "3";
@@ -500,7 +509,7 @@ public class Constant {
         public final static String OFF = "1";
     }
 
-    public static class NOTIFY_ITEM{
+    public static class NOTIFY_ITEM {
         public final static Integer SHOP = 1;
         public final static Integer EVENT = 2;
         public final static Integer TV = 3;
@@ -515,7 +524,7 @@ public class Constant {
         public final static Integer INFO = 12;
     }
 
-    public static class SYS_CONF{
+    public static class SYS_CONF {
         public final static int SYSTEM_STATUS = 1;
         public final static int SYSTEM_STATUS_NORMAL = 1;
         public final static int SYSTEM_STATUS_MAINTENANCE = 2;
@@ -529,7 +538,7 @@ public class Constant {
         public final static int SYSTEM_STATUS_ANDROID_NOW_VERSION = 9;
     }
 
-    public static class VERSION_CODE{
+    public static class VERSION_CODE {
         public final static int VERSION_CODE = 0;
         public final static int VERSION_CODE_ONE = 1;
         public final static int VERSION_CODE_TWO = 2;
@@ -538,8 +547,8 @@ public class Constant {
         public final static int VERSION_CODE_FIVE = 5;
     }
 
-    public static class VERSION_CODE_NAME{
+    public static class VERSION_CODE_NAME {
         public final static String VERSION_CODE_NAME = "1.0.0";
     }
-   
+
 }

@@ -8,11 +8,8 @@ package jp.co.vermore.common.mvc;
  * Copyright: sLab, Corp
  */
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import jp.co.vermore.common.Constant;
+import jp.co.vermore.controller.HomeController;
 import jp.co.vermore.entity.AdminRole;
 import jp.co.vermore.entity.AdminUser;
 import jp.co.vermore.form.admin.AdminUserForm;
@@ -22,9 +19,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import jp.co.vermore.controller.HomeController;
-import jp.co.vermore.common.Constant;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -86,10 +85,7 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
             "/admin/infeed/delete/"};
 
 
-
     private int[] urlActionList = {0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14, 15, 16, 17, 18, 19, 20, 21, 21, 21, 21, 21, 22, 23, 24, 25, 25, 25, 25};
-
-
 
 
     @Override
@@ -100,15 +96,15 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
         sysmili = System.currentTimeMillis();
 
         String uid = getUid(request);
-        logger.info("START:[" + uid + "]" + request.getServletPath());
+        ActionInterceptor.logger.info("START:[" + uid + "]" + request.getServletPath());
 
         // TODO：localのみ適用する
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
 //            Spring3CorsFilter filter = handlerMethod.getMethod().getAnnotation(Spring3CorsFilter.class);
 //            if (filter != null ) {
-//            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Access-Control-Allow-Origin", "http://localhost:9000");
+            response.setHeader("Access-Control-Allow-Origin", "*");
+//            response.setHeader("Access-Control-Allow-Origin", "http://localhost:9000");
             response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setHeader("Access-Control-Max-Age", "3600");
@@ -118,9 +114,8 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
         }
 
 
-
         // check admin user and role
-        if (request.getServletPath().startsWith("/admin") && !request.getServletPath().equals(LOGIN_PATH)) {
+        if (request.getServletPath().startsWith("/admin") && !request.getServletPath().equals(ActionInterceptor.LOGIN_PATH)) {
             HttpSession session = request.getSession();
             if (session.getAttribute(Constant.ADMIN_SESSION.USER) != null) {
                 if (checkRole(request, (AdminUserForm) session.getAttribute(Constant.ADMIN_SESSION.USER))) {
@@ -130,11 +125,10 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 return Boolean.FALSE;
             } else {
-                response.sendRedirect(request.getContextPath() + LOGIN_PATH);
+                response.sendRedirect(request.getContextPath() + ActionInterceptor.LOGIN_PATH);
                 return Boolean.FALSE;
             }
         }
-
 
 
         return true;
@@ -155,11 +149,8 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
             HttpServletResponse response,
             Object handler, Exception ex) throws Exception {
         String uid = getUid(request);
-        logger.info("END:[" + uid + "]" + request.getServletPath() + " score:" + (System.currentTimeMillis() - sysmili));
+        ActionInterceptor.logger.info("END:[" + uid + "]" + request.getServletPath() + " score:" + (System.currentTimeMillis() - sysmili));
     }
-
-
-
 
 
     private boolean checkRole(HttpServletRequest request, AdminUserForm adminUserForm) {
@@ -186,11 +177,6 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
     }
 
 
-
-
-
-
-
     private String getUid(HttpServletRequest request) {
         String uid = request.getHeader(Constant.SESSION.UUID);
         if (uid == null || uid.isEmpty()) {
@@ -204,9 +190,6 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 
         return (uid == null) ? Constant.EMPTY_STRING : uid;
     }
-
-
-
 
 
 }

@@ -2,7 +2,6 @@ package jp.co.vermore.service;
 
 
 import jp.co.vermore.common.Constant;
-import jp.co.vermore.entity.FreePaperDetail;
 import jp.co.vermore.entity.Pic;
 import jp.co.vermore.form.admin.NewsForm;
 import jp.co.vermore.mapper.PicMapper;
@@ -106,7 +105,7 @@ public class PicService {
         return entity.getId();
     }
 
-    public long updateShopPicUrl(String picUrl,long shopId ,long id) {
+    public long updateShopPicUrl(String picUrl, long shopId, long id) {
         Pic entity = new Pic();
         entity.setId(id);
         entity.setItemId(shopId);
@@ -120,7 +119,7 @@ public class PicService {
         return entity.getId();
     }
 
-    public long updateInfoPicUrl(String picUrl,long shopId ,long id) {
+    public long updateInfoPicUrl(String picUrl, long shopId, long id) {
         Pic entity = new Pic();
         entity.setId(id);
         entity.setItemId(shopId);
@@ -134,7 +133,7 @@ public class PicService {
         return entity.getId();
     }
 
-    public long updatePlacePicUrl(String picUrl,long shopId ,long id) {
+    public long updatePlacePicUrl(String picUrl, long shopId, long id) {
         Pic entity = new Pic();
         entity.setId(id);
         entity.setItemId(shopId);
@@ -148,7 +147,7 @@ public class PicService {
         return entity.getId();
     }
 
-    public long updateRecruitPicUrl(String picUrl,long shopId ,long id) {
+    public long updateRecruitPicUrl(String picUrl, long shopId, long id) {
         Pic entity = new Pic();
         entity.setId(id);
         entity.setItemId(shopId);
@@ -177,8 +176,8 @@ public class PicService {
         return picUrl;
     }
 
-    public List<Pic> getShopUrlList(Long id,int itemType) {
-        List<Pic> list = picMapper.getShopUrlList(id,itemType);
+    public List<Pic> getShopUrlList(Long id, int itemType) {
+        List<Pic> list = picMapper.getShopUrlList(id, itemType);
         return list;
     }
 
@@ -195,7 +194,7 @@ public class PicService {
     public int deleteShopPicUrl(Long shopId, int type) {
         Pic pic = new Pic();
         pic.setItemId(shopId);
-        pic.setItemType((byte)type);
+        pic.setItemType((byte) type);
         pic.setDelFlg(Boolean.TRUE);
         int count = picMapper.deleteShopPicUrl(pic);
         return count;
@@ -204,7 +203,7 @@ public class PicService {
     public int deleteNewsPicUrl(Long newsId, int type) {
         Pic pic = new Pic();
         pic.setItemId(newsId);
-        pic.setItemType((byte)type);
+        pic.setItemType((byte) type);
         pic.setDelFlg(Boolean.TRUE);
         int count = picMapper.deleteNewsPicUrl(pic);
         return count;
@@ -212,6 +211,7 @@ public class PicService {
 
     /**
      * 20210317 楊追加
+     *
      * @param newsId
      * @param type
      * @return
@@ -219,11 +219,21 @@ public class PicService {
     public int deleteReportPicUrl(Long newsId, int type) {
         Pic pic = new Pic();
         pic.setItemId(newsId);
-        pic.setItemType((byte)type);
+        pic.setItemType((byte) type);
         pic.setDelFlg(Boolean.TRUE);
         int count = picMapper.deleteReportPicUrl(pic);
         return count;
     }
+
+    public int deleteTeamPicUrl(Long newsId, int type) {
+        Pic pic = new Pic();
+        pic.setItemId(newsId);
+        pic.setItemType((byte) type);
+        pic.setDelFlg(Boolean.TRUE);
+        int count = picMapper.deleteTeamPicUrl(pic);
+        return count;
+    }
+
 
     public Pic getStudioUrl(int id) {
         Pic pic = picMapper.getStudioUrl(id);
@@ -235,8 +245,8 @@ public class PicService {
         return picList;
     }
 
-    public List<Pic> selectPicById(Long id,int type){
-        List<Pic> picList = picMapper.selectPicById(id,type);
+    public List<Pic> selectPicById(Long id, int type) {
+        List<Pic> picList = picMapper.selectPicById(id, type);
         return picList;
     }
 }

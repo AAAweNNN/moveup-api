@@ -63,11 +63,11 @@ public class WidgetService {
 
     public int getGenderNUm(String gender) {
         int genderNum = 0;
-        if (gender .equals("不明") ) {
+        if (gender.equals("不明")) {
             genderNum = Constant.PERSON_GENDER.UNKNOW;
-        } else if (gender .equals("男性") ) {
+        } else if (gender.equals("男性")) {
             genderNum = Constant.PERSON_GENDER.MALE;
-        } else if (gender .equals("女性") ) {
+        } else if (gender.equals("女性")) {
             genderNum = Constant.PERSON_GENDER.FEMALE;
         }
         return genderNum;
@@ -77,33 +77,33 @@ public class WidgetService {
         int careerNum = 0;
         if (career.equals("中学生")) {
             careerNum = Constant.CAREER.JUNIOR_STUDENT;
-        } else if (career .equals("高校生") ) {
+        } else if (career.equals("高校生")) {
             careerNum = Constant.CAREER.SENIOR_STUDENT;
-        } else if (career .equals("専門学生") ) {
+        } else if (career.equals("専門学生")) {
             careerNum = Constant.CAREER.COLLEGE_STUDENT;
-        } else if (career .equals("大学生") ) {
+        } else if (career.equals("大学生")) {
             careerNum = Constant.CAREER.UNIVERSITY_STUDENT;
-        } else if (career .equals("公務員") ) {
+        } else if (career.equals("公務員")) {
             careerNum = Constant.CAREER.CIVIL_SERVANT;
-        } else if (career .equals("自営業") ) {
+        } else if (career.equals("自営業")) {
             careerNum = Constant.CAREER.SELF_EMPLOYED;
-        } else if (career .equals("会社役員") ) {
+        } else if (career.equals("会社役員")) {
             careerNum = Constant.CAREER.EMPLOYEE;
-        } else if (career .equals("会社員") ) {
+        } else if (career.equals("会社員")) {
             careerNum = Constant.CAREER.TEMPORARY;
-        } else if (career .equals("派遣社員") ) {
+        } else if (career.equals("派遣社員")) {
             careerNum = Constant.CAREER.DISPATCHED;
-        } else if (career .equals("契約社員") ) {
+        } else if (career.equals("契約社員")) {
             careerNum = Constant.CAREER.CONTRACT;
-        } else if (career .equals("専業主婦") ) {
+        } else if (career.equals("専業主婦")) {
             careerNum = Constant.CAREER.HOUSE_WIFE;
-        } else if (career .equals("専業主夫") ) {
+        } else if (career.equals("専業主夫")) {
             careerNum = Constant.CAREER.HOUSE_HUSBAND;
-        } else if (career .equals("パート・アルバイト") ) {
+        } else if (career.equals("パート・アルバイト")) {
             careerNum = Constant.CAREER.ARBEIT;
-        } else if (career .equals("その他") ) {
+        } else if (career.equals("その他")) {
             careerNum = Constant.CAREER.OTHER;
-        } else if (career .equals("職業を選択") ) {
+        } else if (career.equals("職業を選択")) {
             careerNum = 0;
         }
         return careerNum;
@@ -119,14 +119,32 @@ public class WidgetService {
             category = "EVENT";
         } else if (newsTypeNum == Constant.NEWS_TYPE.NEWS) {
             category = "NEWS";
-        }else if (newsTypeNum == Constant.NEWS_TYPE.ENTRY) {
+        } else if (newsTypeNum == Constant.NEWS_TYPE.ENTRY) {
             category = "EVENT";
         }
         return category;
     }
 
+    public String getTeamType(int teamTypeNum) {
+        String category = "";
+        if (teamTypeNum == Constant.NEWS_TYPE.UNKNOW) {
+            category = "不明";
+        } else if (teamTypeNum == Constant.TEAM_TYPE.MOVEUP) {
+            category = "MOVEUP";
+        } else if (teamTypeNum == Constant.TEAM_TYPE.EVENT) {
+            category = "EVENT";
+        } else if (teamTypeNum == Constant.TEAM_TYPE.TEAM) {
+            category = "NEWS";
+        } else if (teamTypeNum == Constant.TEAM_TYPE.ENTRY) {
+            category = "EVENT";
+        }
+        return category;
+    }
+
+
     /**
      * 楊20210316レポート機能追加
+     *
      * @param reportTypeNum
      * @return
      */
@@ -140,7 +158,7 @@ public class WidgetService {
             category = "EVENT";
         } else if (reportTypeNum == Constant.REPORT_TYPE.REPORT) {
             category = "REPORT";
-        }else if (reportTypeNum == Constant.REPORT_TYPE.ENTRY) {
+        } else if (reportTypeNum == Constant.REPORT_TYPE.ENTRY) {
             category = "EVENT";
         }
         return category;
@@ -176,7 +194,7 @@ public class WidgetService {
         String color = "";
         if (newsTypeNum == Constant.NEWS_TYPE.MOVEUP) {
             color = "color:red";
-        } else if (newsTypeNum == Constant.NEWS_TYPE.EVENT|| newsTypeNum == Constant.NEWS_TYPE.ENTRY) {
+        } else if (newsTypeNum == Constant.NEWS_TYPE.EVENT || newsTypeNum == Constant.NEWS_TYPE.ENTRY) {
             color = "color:#004984";
         } else {
             color = "color:#009a4c";
@@ -184,8 +202,34 @@ public class WidgetService {
         return color;
     }
 
+    public String getTeamColor(int teamTypeNum) {
+        String color = "";
+        if (teamTypeNum == Constant.TEAM_TYPE.MOVEUP) {
+            color = "background-color:red";
+        } else if (teamTypeNum == Constant.TEAM_TYPE.EVENT || teamTypeNum == Constant.TEAM_TYPE.ENTRY) {
+            color = "background-color:#004984";
+        } else {
+            color = "background-color:#009a4c";
+        }
+        return color;
+    }
+
+    public String getTeamDetailColor(int teamTypeNum) {
+        String color = "";
+        if (teamTypeNum == Constant.NEWS_TYPE.MOVEUP) {
+            color = "color:red";
+        } else if (teamTypeNum == Constant.NEWS_TYPE.EVENT || teamTypeNum == Constant.NEWS_TYPE.ENTRY) {
+            color = "color:#004984";
+        } else {
+            color = "color:#009a4c";
+        }
+        return color;
+    }
+
+
     /**
      * 20210317 楊レポート機能追加
+     *
      * @param reportTypeNum
      * @return
      */
@@ -203,6 +247,7 @@ public class WidgetService {
 
     /**
      * 20210317　楊レポート機能追加
+     *
      * @param reportTypeNum
      * @return
      */
@@ -210,7 +255,7 @@ public class WidgetService {
         String color = "";
         if (reportTypeNum == Constant.REPORT_TYPE.MOVEUP) {
             color = "color:red";
-        } else if (reportTypeNum == Constant.REPORT_TYPE.EVENT|| reportTypeNum == Constant.REPORT_TYPE.ENTRY) {
+        } else if (reportTypeNum == Constant.REPORT_TYPE.EVENT || reportTypeNum == Constant.REPORT_TYPE.ENTRY) {
             color = "color:#004984";
         } else {
             color = "color:#009a4c";
@@ -230,33 +275,33 @@ public class WidgetService {
 
     public String getTopItemType(Byte item) {
         String itemType = "";
-        if (item == 1 ) {
+        if (item == 1) {
             itemType = "login";
-        } else if (item == 2 ) {
+        } else if (item == 2) {
             itemType = "news";
-        } else if (item ==3 ) {
+        } else if (item == 3) {
             itemType = "event";
-        } else if (item ==4 ) {
+        } else if (item == 4) {
             itemType = "freepaper";
-        } else if (item ==5 ) {
+        } else if (item == 5) {
             itemType = "";
-        } else if (item ==6 ) {
+        } else if (item == 6) {
             itemType = "shop";
-        } else if (item ==7 ) {
+        } else if (item == 7) {
             itemType = "place";
-        } else if (item ==8 ) {
+        } else if (item == 8) {
             itemType = "corporate info";
-        } else if (item ==9 ) {
+        } else if (item == 9) {
             itemType = "recruit";
-        } else if (item ==10 ) {
+        } else if (item == 10) {
             itemType = "goods";
-        } else if (item ==11 ) {
+        } else if (item == 11) {
             itemType = "tv";
-        } else if (item ==12 ) {
+        } else if (item == 12) {
             itemType = "jmuw";
-        } else if (item ==13 ) {
+        } else if (item == 13) {
             itemType = "jmuw web";
-        } else if (item ==14 ) {
+        } else if (item == 14) {
             itemType = "その他";
         }
         return itemType;

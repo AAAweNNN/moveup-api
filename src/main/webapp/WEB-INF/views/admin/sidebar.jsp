@@ -3,23 +3,25 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="${pageContext.request.contextPath}/admin/" class="site_title"><span style="color: #F72323">Japan</span><span>MoveUpWest</span></a>
+            <a href="${pageContext.request.contextPath}/admin/" class="site_title"><span
+                    style="color: #F72323">Japan</span><span>MoveUpWest</span></a>
         </div>
-
         <div class="clearfix"></div>
 
         <!-- menu profile quick info -->
         <div class="profile clearfix">
+
             <div class="profile_pic">
                 <img src="/static/img/img.jpg" alt="..." class="img-circle profile_img">
             </div>
+
             <div class="profile_info">
                 <span>ようこそう,</span>
                 <h2>岡山 太郎</h2>
             </div>
+
         </div>
         <!-- /menu profile quick info -->
-
         <br/>
 
         <!-- sidebar menu -->
@@ -33,7 +35,8 @@
                         <a>カテゴリ管理 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="${pageContext.request.contextPath}/admin/shop/list/">協力店</a></li>
-                            <li><a href="${pageContext.request.contextPath}/admin/corporateinfo/list/">コーポレートインフォ</a></li>
+                            <li><a href="${pageContext.request.contextPath}/admin/corporateinfo/list/">コーポレートインフォ</a>
+                            </li>
                             <li><a href="${pageContext.request.contextPath}/admin/place/list/">プレイス</a></li>
                             <li><a href="${pageContext.request.contextPath}/admin/recruit/list/">求人</a></li>
                         </ul>
@@ -44,8 +47,12 @@
                         <ul class="nav child_menu">
                             <li><a href="${pageContext.request.contextPath}/admin/top/">TOP</a></li>
                             <li><a href="${pageContext.request.contextPath}/admin/news/list/">ニュース</a></li>
+                            <%-- 2022.4.25追加内容　by awen--%>
+                            <li><a href="${pageContext.request.contextPath}/admin/team/list/">Slab2022</a></li>
+
                             <%--20210317楊追加--%>
                             <li><a href="${pageContext.request.contextPath}/admin/report/list/">レポート</a></li>
+
                             <li><a href="${pageContext.request.contextPath}/admin/event/list/">イベント</a></li>
                             <li><a href="${pageContext.request.contextPath}/admin/entrymail/list/">応募メール</a></li>
                             <li><a href="${pageContext.request.contextPath}/admin/entry/list/">応募結果</a></li>
@@ -54,11 +61,14 @@
                             <li><a href="${pageContext.request.contextPath}/admin/tv/list/">TV</a></li>
                             <li><a>スタジオ <span class="fa fa-chevron-down"></span>
                                 <ul class="nav child_menu">
-                                    <li><a href="${pageContext.request.contextPath}/admin/studioNews/list/">NEWS</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/admin/studioGallery/">GALLERY</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/admin/studioNews/list/">NEWS</a>
+                                    </li>
+                                    <li><a href="${pageContext.request.contextPath}/admin/studioGallery/">GALLERY</a>
+                                    </li>
                                 </ul>
                             </a></li>
                             <li><a href="${pageContext.request.contextPath}/admin/team2020/list/">TEAM2020</a></li>
+
 
                             <li><a href="${pageContext.request.contextPath}/admin/inquire/list/">お問い合わせ</a></li>
                             <%--<li><a href="${pageContext.request.contextPath}/admin/">(仮)STUDIO</a></li>--%>

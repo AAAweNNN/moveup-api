@@ -47,10 +47,12 @@
         .validatorError {
             color: red;
         }
-        .dark{
+
+        .dark {
             display: none;
         }
-        .alert-info{
+
+        .alert-info {
             display: none;
         }
     </style>
@@ -117,8 +119,9 @@
                                 <div class=" col-sm-1 col-sm-1 col-xs-12">
                                     <a class="btn btn-round btn-success"
                                        href="${pageContext.request.contextPath}/admin/team2020/regist/"
-                                       style="width: 100px;" onclick="gotoRegist()"><span class="glyphicon glyphicon-plus"
-                                                                                          aria-hidden="true"></span>新規</a>
+                                       style="width: 100px;" onclick="gotoRegist()"><span
+                                            class="glyphicon glyphicon-plus"
+                                            aria-hidden="true"></span>新規</a>
                                 </div>
 
                                 <form id="userForm" class="form-horizontal form-label-left input_mask" method="post">
@@ -127,19 +130,25 @@
                                         <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
                                             <input type="text" class="form-control has-feedback-left" id="name"
                                                    placeholder="名前">
-                                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                            <span class="fa fa-user form-control-feedback left"
+                                                  aria-hidden="true"></span>
                                         </div>
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" hidden="hidden">職業</label>
-                                        <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback" hidden="hidden">
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12"
+                                               hidden="hidden">職業</label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback"
+                                             hidden="hidden">
                                             <input type="text" class="form-control has-feedback-left" id="inputSuccess3"
                                                    placeholder="職業">
-                                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                            <span class="fa fa-user form-control-feedback left"
+                                                  aria-hidden="true"></span>
                                         </div>
                                     </div>
 
                                     <div class="col-md-1 text-right" style="padding-right: 15px">
-                                        <button type="submit" class="btn btn-round btn-info " style="width: 100px;"><span
-                                                class="glyphicon glyphicon-search" aria-hidden="true"></span>検索</button>
+                                        <button type="submit" class="btn btn-round btn-info "
+                                                style="width: 100px;"><span
+                                                class="glyphicon glyphicon-search" aria-hidden="true"></span>検索
+                                        </button>
                                     </div>
                                 </form>
 
@@ -270,14 +279,14 @@
 <script>
     var $userForm = $("#userForm");
     $userForm.validate({
-        submitHandler: function(form) {
+        submitHandler: function (form) {
             searchData();
         },
-        errorClass : "validatorError"
+        errorClass: "validatorError"
     });
 
     var datatable = $('#team2020ListTable').DataTable({
-        dom:'lrtip',
+        dom: 'lrtip',
         processing: true,
         serverSide: true,
         ajax: {
@@ -286,33 +295,32 @@
             data: function (data) {
                 data.name = $('#name').val();
                 return JSON.stringify(data);
-
             },
             contentType: "application/json;charset=UTF-8",
             dataType: "json"
         },
-        order: [[ 1, 'asc' ]],
+        order: [[1, 'asc']],
         columns: [
-            { data: "name", name: "name" },
-            { data: "pseudonym", name: "pseudonym" },
+            {data: "name", name: "name"},
+            {data: "pseudonym", name: "pseudonym"},
             {
                 data: null,
                 orderable: false,
                 render: function (data, type, full, meta) {
-                    return '<a class="btn btn-primary" style="font-size: inherit;" href="javascript:void(0)" onclick="gotoUpdate('+full.id+')">詳細</a>';
+                    return '<a class="btn btn-primary" style="font-size: inherit;" href="javascript:void(0)" onclick="gotoUpdate(' + full.id + ')">詳細</a>';
                 }
             },
             {
                 data: null,
                 orderable: false,
                 render: function (data, type, full, meta) {
-                    return '<button class="btn btn-danger" style="font-size: inherit;" onclick="gotoDelete('+full.id+')">削除</button>';
+                    return '<button class="btn btn-danger" style="font-size: inherit;" onclick="gotoDelete(' + full.id + ')">削除</button>';
                 }
             }
         ],
         columnDefs: [
             {
-                targets: [2,3],
+                targets: [2, 3],
                 searchable: false,
                 orderable: false
             }
@@ -338,7 +346,7 @@
 
     function gotoRegist() {
         $('#teamLoading').show();
-        window.location.href =  '${pageContext.request.contextPath}/admin/team2020/regist/';
+        window.location.href = '${pageContext.request.contextPath}/admin/team2020/regist/';
     }
 
     function confirmDeleteClick() {
@@ -354,9 +362,10 @@
         form.css('display', 'none');
         form.submit();
     }
+
     var errorCode = ${errorCode};
 
-    if(errorCode == 1){
+    if (errorCode == 1) {
         new PNotify({
             title: 'エラーが発生しました',
             text: 'データの更新に失敗しました。',

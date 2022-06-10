@@ -20,6 +20,8 @@ public interface PicMapper {
 
     int deleteNewsPicUrl(Pic pic);
 
+    int deleteTeamPicUrl(Pic pic);
+
     //20210317 楊追加
     int deleteReportPicUrl(Pic pic);
 
@@ -41,6 +43,6 @@ public interface PicMapper {
 
     List<Pic> getShopUrlList(long id, int itemType);
 
-    List<Pic> selectPicById(Long id,int type);
+    List<Pic> selectPicById(Long id, int type);
 
 }
