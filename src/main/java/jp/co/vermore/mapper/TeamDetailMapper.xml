@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.vermore.mapper.TeamDetailMapper">
+    <resultMap id="BaseResultMap" type="jp.co.vermore.entity.TeamDetail">
+
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="team_id" property="teamId" jdbcType="BIGINT"/>
+        <result column="date" property="date" jdbcType="TIMESTAMP"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="detail" property="detail" jdbcType="VARCHAR"/>
+        <result column="publish_start" property="publishStart" jdbcType="TIMESTAMP"/>
+        <result column="publish_end" property="publishEnd" jdbcType="TIMESTAMP"/>
+        <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP"/>
+        <result column="update_datetime" property="updateDatetime" jdbcType="TIMESTAMP"/>
+        <result column="del_flg" property="delFlg" jdbcType="BIT"/>
+        <result column="note" property="note" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        , team_id, date, type, title, detail, publish_start, publish_end, create_datetime,
+        update_datetime, del_flg, note
+    </sql>
+
+
+    <insert id="insertDetailTeam">
+        insert into team_detail(
+        team_id,
+        date,
+        type,
+        title,
+        detail,
+        create_datetime,
+        update_datetime,
+        del_flg,
+        note
+        ) values (
+        #{teamId},
+        #{date},
+        #{type},
+        #{title},
+        #{detail},
+        #{createDatetime},
+        #{updateDatetime},
+        #{delFlg},
+        #{note}
+        )
+        <selectKey resultType="Long" keyProperty="id" order="AFTER">
+            select @@IDENTITY
+        </selectKey>
+    </insert>
+
+    <delete id="deleteDetailTeam">
+        update team_detail
+        set del_flg = #{delFlg}
+        where team_id = #{teamId}
+    </delete>
+
+    <update id="updateDetailTeam">
+        update team_detail
+        set date            = #{date},
+            type            = #{type},
+            title           = #{title},
+            detail          = #{detail},
+            create_datetime = #{createDatetime},
+            update_datetime = #{updateDatetime},
+            del_flg         = #{delFlg},
+            note            = #{note}
+        where team_id = #{teamId}
+    </update>
+
+    <select id="getTeamDetailAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from team_detail
+        where del_flg = 0
+        and team_id = #{teamId}
+    </select>
+
+    <select id="getTeamDetail" resultType="String">
+        select detail
+        from team_detail
+        where team_id = #{teamId}
+          AND del_flg = 0
+    </select>
+
+    <select id="getStudioTeamDetail" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from team_detail
+        where del_flg = 0
+        and team_id = #{param1}
+    </select>
+</mapper>
