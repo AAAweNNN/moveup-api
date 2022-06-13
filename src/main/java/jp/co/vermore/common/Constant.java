@@ -421,7 +421,7 @@ public class Constant {
         public final static Byte Team_TOP = 16;
         public final static Byte Team_FOOT = 17;
     }
-
+    
     public static class FREEPAPER_PIC_TYPE {
         public final static Byte IMG = 1;
         public final static Byte PDF = 2;
